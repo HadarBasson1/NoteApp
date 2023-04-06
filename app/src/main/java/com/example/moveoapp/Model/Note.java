@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import com.example.moveoapp.MyApplication;
 import com.google.firebase.firestore.FieldValue;
@@ -13,7 +15,9 @@ import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
+@Entity
 public class Note {
+    @PrimaryKey
     @NonNull
     public String key="";
     public String title="";
@@ -36,7 +40,6 @@ public class Note {
         this.key=key;
         this.isDeleted=isDeleted;
     }
-
 
     static final String TITLE = "title";
     static final String DATE = "date";

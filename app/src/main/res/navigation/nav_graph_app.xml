@@ -4,10 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_app"
     app:startDestination="@id/homeFragment">
-
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.moveoapp.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/noteMapFragment"
+        android:name="com.example.moveoapp.NoteMapFragment"
+        android:label="fragment_note_map"
+        tools:layout="@layout/fragment_note_map" />
+    <fragment
+        android:id="@+id/noteListFragment"
+        android:name="com.example.moveoapp.NoteListFragment"
+        android:label="fragment_note_list"
+        tools:layout="@layout/fragment_note_list" /><action android:id="@+id/action_global_noteListFragment" app:destination="@id/noteListFragment"/><action android:id="@+id/action_global_noteMapFragment" app:destination="@id/noteMapFragment"/>
 </navigation>
