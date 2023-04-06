@@ -19,4 +19,9 @@
         android:name="com.example.moveoapp.NoteListFragment"
         android:label="fragment_note_list"
         tools:layout="@layout/fragment_note_list" /><action android:id="@+id/action_global_noteListFragment" app:destination="@id/noteListFragment"/><action android:id="@+id/action_global_noteMapFragment" app:destination="@id/noteMapFragment"/>
+    <fragment
+        android:id="@+id/addNoteFragment"
+        android:name="com.example.moveoapp.AddNoteFragment"
+        android:label="fragment_add_note"
+        tools:layout="@layout/fragment_add_note" /><action android:id="@+id/action_global_addNoteFragment" app:destination="@id/addNoteFragment"/>
 </navigation>

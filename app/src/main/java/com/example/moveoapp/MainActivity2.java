@@ -13,12 +13,16 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 
 import com.example.moveoapp.Model.Model;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity2 extends AppCompatActivity {
     NavController navController;
+    FloatingActionButton addBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +31,18 @@ public class MainActivity2 extends AppCompatActivity {
         navController = navHostFragment.getNavController();
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         NavigationUI.setupWithNavController(bottomNavigationView,navController);
+        addBtn=findViewById(R.id.floatingActionButton);
+
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navController.popBackStack();
+                navController.navigate(R.id.action_global_addNoteFragment);
+            }
+        });
+
     }
+
 
 
     @Override
@@ -48,15 +63,18 @@ public class MainActivity2 extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-        else {
-            return NavigationUI.onNavDestinationSelected(item,navController);
+//        else {
+//            return NavigationUI.onNavDestinationSelected(item,navController);
+//        }
+        else if(item.getItemId()==R.id.noteListFragment){
+
+            navController.navigate(R.id.action_global_noteListFragment);
         }
-//        }else if(item.getItemId()==R.id.noteListFragment){
-//            navController.navigate(R.id.action_global_noteListFragment);
-//        }
-//        else if(item.getItemId()==R.id.noteMapFragment){
-//            navController.navigate(R.id.action_global_noteMapFragment);
-//        }
+        else if(item.getItemId()==R.id.noteMapFragment){
+
+            navController.navigate(R.id.action_global_noteMapFragment);
+        }
+//
 
 
         return super.onOptionsItemSelected(item);
