@@ -36,6 +36,7 @@ public class Model {
     }
 
 
+
     public interface Listener<T>{
         void onComplete(T data);
     }
@@ -71,6 +72,16 @@ public class Model {
     public void findNameByEmail(String email,Listener<String>listener) {
         FirebaseModel.findNameByEmail(email,listener);
     }
+
+    public void insertNote(Note note,Listener<Void> callback) {
+        executor.execute(()->{
+            localDb.noteDao().insertAll(note);
+            mainHandler.post(()->{
+                callback.onComplete(null);
+            });
+        });
+    }
+
 
 
 
