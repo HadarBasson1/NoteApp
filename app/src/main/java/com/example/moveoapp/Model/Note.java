@@ -47,7 +47,7 @@ public class Note {
     static final String COLLECTION = "notes";
     static final String IS_DELETED = "isDeleted";
     static final String LAST_UPDATED = "lastUpdated";
-    static final String LOCAL_LAST_UPDATED = "recipes_local_last_update";
+    static final String LOCAL_LAST_UPDATED = "notes_local_last_update";
 
     public static Note fromJson(Map<String,Object> json){
         String title = (String)json.get(TITLE);

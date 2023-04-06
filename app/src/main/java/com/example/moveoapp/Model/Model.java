@@ -25,7 +25,6 @@ public class Model {
     }
 
 
-
     public interface Listener<T>{
         void onComplete(T data);
     }
@@ -36,8 +35,8 @@ public class Model {
         NOT_LOADING
     }
 
-    public void regiser(String email, String password, Listener<FirebaseUser> listener){
-        FirebaseModel.register(email,password,listener);
+    public void regiser(String email, String password,String name, Listener<User> listener){
+        FirebaseModel.register(email,password,name,listener);
     }
 
     public void login(String email, String password, Listener<FirebaseUser> listener){
@@ -51,6 +50,12 @@ public class Model {
     public boolean currentUser(){
         return FirebaseModel.currentUser();
     }
+
+
+    public void findNameByEmail(String email,Listener<String>listener) {
+        FirebaseModel.findNameByEmail(email,listener);
+    }
+
 
 
 }

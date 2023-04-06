@@ -1,7 +1,10 @@
 package com.example.moveoapp;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -17,10 +20,12 @@ public class LandingPageFragment extends Fragment {
 
     FragmentLandingPageBinding binding;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         binding = FragmentLandingPageBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 

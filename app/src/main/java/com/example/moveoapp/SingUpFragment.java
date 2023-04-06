@@ -2,7 +2,9 @@ package com.example.moveoapp;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -15,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.moveoapp.Model.Model;
+import com.example.moveoapp.Model.User;
 import com.example.moveoapp.databinding.ActivityMainBinding;
 import com.example.moveoapp.databinding.FragmentLandingPageBinding;
 import com.example.moveoapp.databinding.FragmentSingUpBinding;
@@ -24,6 +27,7 @@ public class SingUpFragment extends Fragment {
     FragmentSingUpBinding binding;
     String emailInput;
     String passwordInput;
+    String nameInput;
 
 
     @Override
@@ -38,9 +42,10 @@ public class SingUpFragment extends Fragment {
             public void onClick(View v) {
                 emailInput= binding.singUpEmailInput.getText().toString();
                 passwordInput= binding.singUpPasswordInput.getText().toString();
-                Model.instance().regiser(emailInput, passwordInput, new Model.Listener<FirebaseUser>() {
+                nameInput= binding.singUpNameInput.getText().toString();
+                Model.instance().regiser(emailInput, passwordInput,nameInput, new Model.Listener<User>() {
                     @Override
-                    public void onComplete(FirebaseUser data) {
+                    public void onComplete(User data) {
                         if(data!=null){
                             Log.d(TAG, "createUserWithEmail:success From SingUp Page!!!!!!!!");
                             Intent intent = new Intent(getActivity().getApplicationContext(), MainActivity2.class);

@@ -41,9 +41,6 @@ public class LogInFragment extends Fragment {
                             public void onComplete(FirebaseUser data) {
                                 if(data!=null){
                                     Log.d(TAG, "createUserWithEmail:success From SingUp Page!!!!!!!!");
-                                    Intent intent = new Intent(getActivity().getApplicationContext(), MainActivity2.class);
-                                    startActivity(intent);
-                                    getActivity().finish();
                                 }
 
                                 else {
