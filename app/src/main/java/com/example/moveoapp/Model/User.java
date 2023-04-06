@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import com.example.moveoapp.MyApplication;
 import com.google.firebase.firestore.FieldValue;
@@ -12,10 +14,12 @@ import com.google.firebase.firestore.FieldValue;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
-
+@Entity
 public class User {
-    public String name="";
+    @PrimaryKey
+    @NonNull
     public String email="";
+    public String name="";
 //    public String imgUrl="";
     public Long lastUpdated=0L;
 

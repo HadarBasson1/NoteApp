@@ -47,13 +47,14 @@ public class FirebaseModel {
                             Log.d(TAG, "createUserWithEmail:success");
                             user = mAuth.getCurrentUser();
                             User new_user = new User(name,email);
-                            db.collection(User.COLLECTION).document(new_user.getEmail()).set(new_user.toJson())
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            listener.onComplete(new_user);
-                                        }
-                                    });
+                            listener.onComplete(new_user);
+//                            db.collection(User.COLLECTION).document(new_user.getEmail()).set(new_user.toJson())
+//                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                        @Override
+//                                        public void onComplete(@NonNull Task<Void> task) {
+//                                            listener.onComplete(new_user);
+//                                        }
+//                                    });
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.d(TAG, "createUserWithEmail:failed from model firebase");

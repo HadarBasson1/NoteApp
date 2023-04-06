@@ -3,6 +3,7 @@ package com.example.moveoapp.Model;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public interface NoteDao {
 //            "last_name LIKE :last LIMIT 1")
 //    User findByName(String first, String last);
 
-    @Insert
+    @Insert (onConflict = OnConflictStrategy.REPLACE)
     void insertAll(Note... notes);
 
     @Delete
