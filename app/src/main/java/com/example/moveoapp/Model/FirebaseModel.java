@@ -33,8 +33,10 @@ public class FirebaseModel {
 
 
 
-    public static boolean currentUser(){
-            return user!=null;
+    public static String currentUser(){
+        if(user!=null)
+            return user.getEmail();
+        return null;
     }
 
     public static void register(String email, String password,String name, Model.Listener<User> listener){

@@ -23,10 +23,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class MainActivity2 extends AppCompatActivity {
     NavController navController;
     FloatingActionButton addBtn;
+    static String name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+         name = getIntent().getStringExtra("name");
         NavHostFragment navHostFragment= (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host2);
         navController = navHostFragment.getNavController();
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);

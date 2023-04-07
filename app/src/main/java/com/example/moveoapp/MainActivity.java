@@ -22,10 +22,18 @@ public class MainActivity extends AppCompatActivity {
         NavHostFragment navHostFragment = (NavHostFragment)getSupportFragmentManager().findFragmentById(R.id.main_navhost);
         navController = navHostFragment.getNavController();
         NavigationUI.setupActionBarWithNavController(this,navController);
-        if(Model.instance().currentUser() == true){
-            Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
-            startActivity(intent);
-            finish();
+        if(Model.instance().currentUser()!=null){
+            String email=Model.instance().currentUser();
+            Model.instance().findNameByEmail(email, new Model.Listener<String>() {
+                @Override
+                public void onComplete(String name) {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
+                    intent.putExtra("name",name);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+
         }
     }
 

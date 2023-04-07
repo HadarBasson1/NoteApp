@@ -45,12 +45,16 @@ public class SingUpFragment extends Fragment {
                 nameInput= binding.singUpNameInput.getText().toString();
                 Model.instance().regiser(emailInput, passwordInput,nameInput, new Model.Listener<User>() {
                     @Override
-                    public void onComplete(User data) {
-                        if(data!=null){
+                    public void onComplete(User user) {
+                        if(user!=null){
                             Log.d(TAG, "createUserWithEmail:success From SingUp Page!!!!!!!!");
-                            Intent intent = new Intent(getActivity().getApplicationContext(), MainActivity2.class);
-                            startActivity(intent);
-                            getActivity().finish();
+                            Model.instance().insertUser(user,(Void)->{
+                                Intent intent = new Intent(getActivity().getApplicationContext(), MainActivity2.class);
+                                intent.putExtra("name",user.getName());
+                                startActivity(intent);
+                                getActivity().finish();
+                            });
+
                         }
 
                         else {

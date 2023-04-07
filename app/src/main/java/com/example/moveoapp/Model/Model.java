@@ -5,7 +5,6 @@ import android.os.Looper;
 
 import androidx.core.os.HandlerCompat;
 
-import com.example.moveoapp.MyApplication;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
@@ -48,12 +47,7 @@ public class Model {
     }
 
     public void regiser(String email, String password,String name, Listener<User> listener){
-        FirebaseModel.register(email, password, name, new Listener<User>() {
-            @Override
-            public void onComplete(User user) {
-                localDb.userDao().insertAll(user);
-            }
-        });
+        FirebaseModel.register(email, password, name,listener);
     }
 
     public void login(String email, String password, Listener<FirebaseUser> listener){
@@ -64,20 +58,39 @@ public class Model {
         FirebaseModel.logOut();
     }
 
-    public boolean currentUser(){
+    public String currentUser(){
         return FirebaseModel.currentUser();
     }
 
 
-    public void findNameByEmail(String email,Listener<String>listener) {
-        FirebaseModel.findNameByEmail(email,listener);
-    }
+//    public void findNameByEmail(String email,Listener<String>listener) {
+//        FirebaseModel.findNameByEmail(email,listener);
+//    }
 
     public void insertNote(Note note,Listener<Void> callback) {
         executor.execute(()->{
             localDb.noteDao().insertAll(note);
             mainHandler.post(()->{
                 callback.onComplete(null);
+            });
+        });
+    }
+
+
+    public void insertUser(User user,Listener<Void> callback) {
+        executor.execute(()->{
+            localDb.userDao().insertAll(user);
+            mainHandler.post(()->{
+                callback.onComplete(null);
+            });
+        });
+    }
+
+    public void findNameByEmail(String email,Listener<String> callback) {
+        executor.execute(()->{
+            String name=localDb.userDao().getNameByEmail(email);
+            mainHandler.post(()->{
+                callback.onComplete(name);
             });
         });
     }

@@ -1,6 +1,7 @@
 package com.example.moveoapp;
 
 import static android.content.Intent.getIntent;
+import static android.content.Intent.getIntentOld;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -18,9 +19,8 @@ import com.example.moveoapp.databinding.FragmentHomeBinding;
 import com.example.moveoapp.databinding.FragmentLandingPageBinding;
 
 public class HomeFragment extends Fragment {
-  String name;
   FragmentHomeBinding binding;
-
+    String name;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,9 +32,8 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-            binding.homeWelcomMsg.setText("Welcom");
 
-
+            binding.homeWelcomMsg.setText("Welcom "+MainActivity2.name);
         return view;
     }
 }

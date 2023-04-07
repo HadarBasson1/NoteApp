@@ -38,12 +38,20 @@ public class LogInFragment extends Fragment {
                 Model.instance().login(emailInput, passwordInput, new
                         Model.Listener<FirebaseUser>() {
                             @Override
-                            public void onComplete(FirebaseUser data) {
-                                if(data!=null){
-                                    Log.d(TAG, "createUserWithEmail:success From SingUp Page!!!!!!!!");
-                                    Intent intent = new Intent(getActivity().getApplicationContext(), MainActivity2.class);
-                                    startActivity(intent);
-                                    getActivity().finish();
+                            public void onComplete(FirebaseUser user) {
+                                if(user!=null){
+                                    String email = user.getEmail();
+                                    Model.instance().findNameByEmail(email, new Model.Listener<String>() {
+                                        @Override
+                                        public void onComplete(String name) {
+                                            Log.d(TAG, "createUserWithEmail:success From SingUp Page!!!!!!!!");
+                                            Intent intent = new Intent(getActivity().getApplicationContext(), MainActivity2.class);
+                                            intent.putExtra("name",name);
+                                            startActivity(intent);
+                                            getActivity().finish();
+                                        }
+                                    });
+
                                 }
 
                                 else {
