@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.util.Log;
@@ -52,10 +53,11 @@ public class NoteListFragment extends Fragment {
         adapter.setOnItemClickListener(new NoteRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int pos) {
+
                 Log.d("TAG", "Row was clicked " + pos);
                 Note note = data.get(pos);
-//                NoteListFragmentDirections.ActionStudentsListFragmentToBlueFragment action = StudentsListFragmentDirections.actionStudentsListFragmentToBlueFragment(st.name);
-//                Navigation.findNavController(view).navigate(action);
+                NoteListFragmentDirections.ActionNoteListFragmentToNoteDetailsFragment action = NoteListFragmentDirections.actionNoteListFragmentToNoteDetailsFragment(note.getTitle(),note.getBody(),note.getDate());
+                Navigation.findNavController(view).navigate(action);
             }
         });
 

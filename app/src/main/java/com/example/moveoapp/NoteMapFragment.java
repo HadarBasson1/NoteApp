@@ -3,6 +3,7 @@ package com.example.moveoapp;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
@@ -36,18 +38,30 @@ public class NoteMapFragment extends Fragment {
 
         @Override
         public void onMapReady(GoogleMap googleMap) {
+
             Model.instance().getAllNotes((list)->{
                 data=list;
                 for (Note note : data) {
                     LatLng location=new LatLng(Double.parseDouble(note.getLatitude()), Double.parseDouble(note.getLongitude()));
                     MarkerOptions markerOptions = new MarkerOptions();
-                    markerOptions.position(location);
+                    markerOptions.position(location).title(note.getTitle());
                     googleMap.addMarker(markerOptions);
+
+                    googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                        @Override
+                        public void onInfoWindowClick(Marker marker) {
+                            NoteMapFragmentDirections.ActionNoteMapFragmentToNoteDetailsFragment action = NoteMapFragmentDirections.actionNoteMapFragmentToNoteDetailsFragment(note.getTitle(), note.body, note.date);
+                            Navigation.findNavController(getView()).navigate(action);
+                        }
+                    });
+
+
                 }
 //                LatLng sydney = new LatLng(-34, 151);
 //                googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
 //                googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
             });
+
 
         }
     };
@@ -57,6 +71,7 @@ public class NoteMapFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
         return inflater.inflate(R.layout.fragment_note_map, container, false);
     }
 

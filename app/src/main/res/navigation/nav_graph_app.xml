@@ -13,15 +13,39 @@
         android:id="@+id/noteMapFragment"
         android:name="com.example.moveoapp.NoteMapFragment"
         android:label="fragment_note_map"
-        tools:layout="@layout/fragment_note_map" />
+        tools:layout="@layout/fragment_note_map" >
+        <action
+            android:id="@+id/action_noteMapFragment_to_noteDetailsFragment"
+            app:destination="@id/noteDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/noteListFragment"
         android:name="com.example.moveoapp.NoteListFragment"
         android:label="fragment_note_list"
-        tools:layout="@layout/fragment_note_list" /><action android:id="@+id/action_global_noteListFragment" app:destination="@id/noteListFragment"/><action android:id="@+id/action_global_noteMapFragment" app:destination="@id/noteMapFragment"/>
+        tools:layout="@layout/fragment_note_list" >
+        <action
+            android:id="@+id/action_noteListFragment_to_noteDetailsFragment"
+            app:destination="@id/noteDetailsFragment" />
+    </fragment><action android:id="@+id/action_global_noteListFragment" app:destination="@id/noteListFragment"/><action android:id="@+id/action_global_noteMapFragment" app:destination="@id/noteMapFragment"/>
     <fragment
         android:id="@+id/addNoteFragment"
         android:name="com.example.moveoapp.AddNoteFragment"
         android:label="fragment_add_note"
         tools:layout="@layout/fragment_add_note" /><action android:id="@+id/action_global_addNoteFragment" app:destination="@id/addNoteFragment"/>
+    <action android:id="@+id/action_global_notedetailsFragment" app:destination="@id/noteDetailsFragment" />
+    <fragment
+        android:id="@+id/noteDetailsFragment"
+        android:name="com.example.moveoapp.NoteDetailsFragment"
+        android:label="fragment_note_details"
+        tools:layout="@layout/fragment_note_details" >
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="body"
+            app:argType="string" />
+        <argument
+            android:name="date"
+            app:argType="string" />
+    </fragment>
 </navigation>

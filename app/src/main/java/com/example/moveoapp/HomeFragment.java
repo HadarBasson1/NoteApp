@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 
 import com.example.moveoapp.Model.Model;
 import com.example.moveoapp.databinding.FragmentHomeBinding;
-import com.example.moveoapp.databinding.FragmentLandingPageBinding;
+
 
 public class HomeFragment extends Fragment {
   FragmentHomeBinding binding;
@@ -32,8 +32,9 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-
-            binding.homeWelcomMsg.setText("Welcome "+MainActivity2.name);
+        if(MainActivity2.name==null)
+            binding.homeWelcomMsg.setText("Welcome");
+        else binding.homeWelcomMsg.setText("Welcome "+MainActivity2.name);
         return view;
     }
 }

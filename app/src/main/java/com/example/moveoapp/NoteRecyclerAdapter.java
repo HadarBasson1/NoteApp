@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.moveoapp.Model.Note;
@@ -49,6 +50,7 @@ class NoteViewHolder extends RecyclerView.ViewHolder {
     public void bind(Note note, int pos) {
         titelTv.setText(note.getTitle());
         dateTv.setText(note.getDate());
+
 //        idTv.setText(st.id);
 //        cb.setChecked(st.cb);
 //        cb.setTag(pos);

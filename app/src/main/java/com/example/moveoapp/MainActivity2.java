@@ -65,17 +65,16 @@ public class MainActivity2 extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-//        else {
-//            return NavigationUI.onNavDestinationSelected(item,navController);
+        else {
+            return NavigationUI.onNavDestinationSelected(item,navController);
+        }
+//        else if(item.getItemId()==R.id.noteListFragment){
+//
+//            navController.navigate(R.id.action_global_noteListFragment);
 //        }
-        else if(item.getItemId()==R.id.noteListFragment){
-
-            navController.navigate(R.id.action_global_noteListFragment);
-        }
-        else if(item.getItemId()==R.id.noteMapFragment){
-
-            navController.navigate(R.id.action_global_noteMapFragment);
-        }
+//        else if(item.getItemId()==R.id.noteMapFragment){
+//            navController.navigate(R.id.action_global_noteMapFragment);
+//        }
 //
 
 
