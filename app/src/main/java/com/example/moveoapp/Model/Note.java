@@ -27,15 +27,19 @@ public class Note {
 //    public String imgUrl="";
 //    public String isDeleted="";
     public Long lastUpdated=0L;
+    public String latitude="";
+    public String longitude="";
 
     public Note(){
     }
 
-    public Note(String title, String date, String body,String key,String editor) {
+    public Note(String title, String date, String body,String key,String editor,String latitude,String longitude) {
         this.title = title;
         this.date = date;
         this.body = body;
         this.editor = editor;
+        this.latitude=latitude;
+        this.longitude=longitude;
 //        this.imgUrl = imgUrl;
         this.key=key;
 //        this.isDeleted=isDeleted;
@@ -47,6 +51,8 @@ public class Note {
     static final String EDITOR = "editor";
 //    static final String AVATAR = "avatar";
     static final String KEY = "key";
+    static final String LATITUDE = "latitude";
+    static final String LONGITUDE = "longitude";
     static final String COLLECTION = "notes";
 //    static final String IS_DELETED = "isDeleted";
     static final String LAST_UPDATED = "lastUpdated";
@@ -56,11 +62,13 @@ public class Note {
         String title = (String)json.get(TITLE);
         String date = (String)json.get(DATE);
         String body = (String)json.get(BODY);
+        String latitude = (String)json.get(LATITUDE);
+        String longitude = (String)json.get(LONGITUDE);
         String editor = (String)json.get(EDITOR);
 //        String avatar = (String)json.get(AVATAR);
         String key=(String)json.get(KEY);
 //        String isDeleted=(String) json.get(IS_DELETED);
-        Note note = new Note(title,date,body,key,editor);
+        Note note = new Note(title,date,body,key,editor,latitude,longitude);
         try{
             Timestamp time = (Timestamp) json.get(LAST_UPDATED);
             note.setLastUpdated((long) time.getSeconds());
@@ -86,6 +94,14 @@ public class Note {
 
     public String getBody() {
         return body;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
     }
 
     public String getEditor() {
@@ -118,6 +134,14 @@ public class Note {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 
     public void setEditor(String editor) {
@@ -154,6 +178,8 @@ public class Note {
         json.put(TITLE, getTitle());
         json.put(DATE, getDate());
         json.put(BODY, getBody());
+        json.put(LATITUDE, getLatitude());
+        json.put(LONGITUDE, getLongitude());
 //        json.put(EDITOR, getEditor());
 //        json.put(AVATAR, getImgUrl());
         json.put(KEY, getKey());

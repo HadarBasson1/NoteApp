@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.moveoapp.Model.Model;
+import com.example.moveoapp.Model.Note;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -16,8 +18,10 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class NoteMapFragment extends Fragment {
+import java.util.List;
 
+public class NoteMapFragment extends Fragment {
+    List<Note> data;
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
         /**
@@ -29,11 +33,22 @@ public class NoteMapFragment extends Fragment {
          * install it inside the SupportMapFragment. This method will only be triggered once the
          * user has installed Google Play services and returned to the app.
          */
+
         @Override
         public void onMapReady(GoogleMap googleMap) {
-            LatLng sydney = new LatLng(-34, 151);
-            googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+            Model.instance().getAllNotes((list)->{
+                data=list;
+                for (Note note : data) {
+                    LatLng location=new LatLng(Double.parseDouble(note.getLatitude()), Double.parseDouble(note.getLongitude()));
+                    MarkerOptions markerOptions = new MarkerOptions();
+                    markerOptions.position(location);
+                    googleMap.addMarker(markerOptions);
+                }
+//                LatLng sydney = new LatLng(-34, 151);
+//                googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+//                googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+            });
+
         }
     };
 
@@ -49,7 +64,7 @@ public class NoteMapFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         SupportMapFragment mapFragment =
-                (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+                (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.fragment_note_map);
         if (mapFragment != null) {
             mapFragment.getMapAsync(callback);
         }
