@@ -15,6 +15,9 @@
         android:label="fragment_note_map"
         tools:layout="@layout/fragment_note_map" >
         <action
+            android:id="@+id/action_noteMapFragment_to_notedetailsFragment"
+            app:destination="@id/noteDetailsFragment" />
+        <action
             android:id="@+id/action_noteMapFragment_to_noteDetailsFragment"
             app:destination="@id/noteDetailsFragment" />
     </fragment>
@@ -23,6 +26,9 @@
         android:name="com.example.moveoapp.NoteListFragment"
         android:label="fragment_note_list"
         tools:layout="@layout/fragment_note_list" >
+        <action
+            android:id="@+id/action_noteListFragment_to_notedetailsFragment"
+            app:destination="@id/noteDetailsFragment" />
         <action
             android:id="@+id/action_noteListFragment_to_noteDetailsFragment"
             app:destination="@id/noteDetailsFragment" />

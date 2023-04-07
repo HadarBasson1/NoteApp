@@ -4,9 +4,11 @@
     <item
         android:id="@+id/noteListFragment"
         android:icon="@drawable/ic_baseline_format_list_bulleted_24"
-        android:title="Note List:" />
+        android:title="Note List:"
+        />
     <item
         android:id="@+id/noteMapFragment"
         android:icon="@drawable/ic_baseline_map_24"
         android:title="Note Map" />
 </menu>
+

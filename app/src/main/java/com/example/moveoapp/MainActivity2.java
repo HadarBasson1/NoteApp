@@ -1,6 +1,7 @@
 package com.example.moveoapp;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -11,7 +12,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -32,13 +35,28 @@ public class MainActivity2 extends AppCompatActivity {
         NavHostFragment navHostFragment= (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host2);
         navController = navHostFragment.getNavController();
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.findViewById(R.id.noteMapFragment).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navController.navigate(R.id.action_global_noteMapFragment);
+            }
+        });
+        bottomNavigationView.findViewById(R.id.noteListFragment).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navController.navigate(R.id.action_global_noteListFragment);
+            }
+        });
         NavigationUI.setupWithNavController(bottomNavigationView,navController);
-        addBtn=findViewById(R.id.floatingActionButton);
+        NavigationUI.setupActionBarWithNavController(this,navController);
 
+        addBtn=findViewById(R.id.floatingActionButton);
+//        ActionBar ab=getSupportActionBar();
+//        ab.setDisplayHomeAsUpEnabled(true);
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navController.popBackStack();
+//                navController.popBackStack();
                 navController.navigate(R.id.action_global_addNoteFragment);
             }
         });
@@ -49,14 +67,15 @@ public class MainActivity2 extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu,menu);
-        return super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId()== android.R.id.home){
-            navController.popBackStack();
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            return navController.navigateUp();
         }
 
         else if(item.getItemId() == R.id.menu_logout) {
@@ -65,11 +84,13 @@ public class MainActivity2 extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-        else {
-            return NavigationUI.onNavDestinationSelected(item,navController);
-        }
+//        else {
+//            return NavigationUI.onNavDestinationSelected(item,navController);
+//        }
+
+
 //        else if(item.getItemId()==R.id.noteListFragment){
-//
+//            Log.d("tag","hiiiii");
 //            navController.navigate(R.id.action_global_noteListFragment);
 //        }
 //        else if(item.getItemId()==R.id.noteMapFragment){
@@ -80,7 +101,6 @@ public class MainActivity2 extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 
 
 
