@@ -33,7 +33,7 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-            binding.homeWelcomMsg.setText("Welcom "+MainActivity2.name);
+            binding.homeWelcomMsg.setText("Welcome "+MainActivity2.name);
         return view;
     }
 }

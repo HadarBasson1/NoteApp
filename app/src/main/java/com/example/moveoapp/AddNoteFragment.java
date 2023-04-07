@@ -15,6 +15,11 @@ import com.example.moveoapp.Model.Model;
 import com.example.moveoapp.Model.Note;
 import com.example.moveoapp.databinding.FragmentAddNoteBinding;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 
 public class AddNoteFragment extends Fragment {
 FragmentAddNoteBinding binding;
@@ -44,7 +49,14 @@ FragmentAddNoteBinding binding;
             public void onClick(View v) {
                 String title = binding.addNoteFragmentTitle.getText().toString();
                 String body = binding.addNoteFragmentBody.getText().toString();
-                Note note = new Note(title,"",body,"1","","1224","");
+                String key = RandomKeyGenerator.generateRandomKey();
+                String formattedDateTime="";
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    LocalDateTime currentDateTime = LocalDateTime.now();
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                    formattedDateTime = currentDateTime.format(formatter);
+                }
+                Note note = new Note(title,formattedDateTime,body,key,"lala");
                 Model.instance().insertNote(note, new Model.Listener<Void>() {
                     @Override
                     public void onComplete(Void data) {

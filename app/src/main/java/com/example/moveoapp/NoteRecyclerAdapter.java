@@ -16,6 +16,7 @@ import java.util.List;
 class NoteViewHolder extends RecyclerView.ViewHolder {
     //    TextView nameTv;
     TextView titelTv;
+    TextView dateTv;
 //    CheckBox cb;
     List<Note> data;
 //    ImageView avatarImage;
@@ -24,6 +25,7 @@ class NoteViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         this.data = data;
         titelTv = itemView.findViewById(R.id.note_title);
+        dateTv=itemView.findViewById(R.id.note_date);
 //        idTv = itemView.findViewById(R.id.studentlistrow_id_tv);
 //        avatarImage = itemView.findViewById(R.id.studentlistrow_avatar_img);
 //        cb = itemView.findViewById(R.id.studentlistrow_cb);
@@ -46,6 +48,7 @@ class NoteViewHolder extends RecyclerView.ViewHolder {
 
     public void bind(Note note, int pos) {
         titelTv.setText(note.getTitle());
+        dateTv.setText(note.getDate());
 //        idTv.setText(st.id);
 //        cb.setChecked(st.cb);
 //        cb.setTag(pos);

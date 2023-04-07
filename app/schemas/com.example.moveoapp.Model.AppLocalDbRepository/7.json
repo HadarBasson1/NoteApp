@@ -1,12 +1,12 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 5,
-    "identityHash": "cca4093b64f24af375265c31ca3ff421",
+    "version": 7,
+    "identityHash": "17125f6c9c9cff0820155563898ddd7e",
     "entities": [
       {
         "tableName": "Note",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`key` TEXT NOT NULL, `title` TEXT, `date` TEXT, `body` TEXT, `lastUpdated` INTEGER, PRIMARY KEY(`key`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`key` TEXT NOT NULL, `title` TEXT, `date` TEXT, `body` TEXT, `editor` TEXT, `lastUpdated` INTEGER, PRIMARY KEY(`key`))",
         "fields": [
           {
             "fieldPath": "key",
@@ -29,6 +29,12 @@
           {
             "fieldPath": "body",
             "columnName": "body",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "editor",
+            "columnName": "editor",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -84,7 +90,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'cca4093b64f24af375265c31ca3ff421')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '17125f6c9c9cff0820155563898ddd7e')"
     ]
   }
 }
