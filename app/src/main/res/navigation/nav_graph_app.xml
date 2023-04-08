@@ -45,13 +45,7 @@
         android:label="fragment_note_details"
         tools:layout="@layout/fragment_note_details" >
         <argument
-            android:name="title"
-            app:argType="string" />
-        <argument
-            android:name="body"
-            app:argType="string" />
-        <argument
-            android:name="date"
-            app:argType="string" />
+            android:name="Note"
+            app:argType="com.example.moveoapp.Model.Note" />
     </fragment>
 </navigation>

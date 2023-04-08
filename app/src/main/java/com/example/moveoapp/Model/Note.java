@@ -11,12 +11,13 @@ import androidx.room.PrimaryKey;
 import com.example.moveoapp.MyApplication;
 import com.google.firebase.firestore.FieldValue;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
 @Entity
-public class Note {
+public class Note implements Serializable {
     @PrimaryKey
     @NonNull
     public String key="";

@@ -95,6 +95,16 @@ public class Model {
         });
     }
 
+    public void delete(Note note,Listener<Void> callback) {
+            executor.execute(()->{ localDb.noteDao().delete(note);
+            mainHandler.post(()->{
+                callback.onComplete(null);
+            });
+        });
+    }
+
+
+
 
 
 

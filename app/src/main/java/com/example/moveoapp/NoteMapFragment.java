@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,7 +39,7 @@ public class NoteMapFragment extends Fragment {
 
         @Override
         public void onMapReady(GoogleMap googleMap) {
-
+            googleMap.clear();
             Model.instance().getAllNotes((list)->{
                 data=list;
                 for (Note note : data) {
@@ -50,7 +51,7 @@ public class NoteMapFragment extends Fragment {
                     googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
                         @Override
                         public void onInfoWindowClick(Marker marker) {
-                            NoteMapFragmentDirections.ActionNoteMapFragmentToNoteDetailsFragment action = NoteMapFragmentDirections.actionNoteMapFragmentToNoteDetailsFragment(note.getTitle(), note.body, note.date);
+                            NoteMapFragmentDirections.ActionNoteMapFragmentToNoteDetailsFragment action = NoteMapFragmentDirections.actionNoteMapFragmentToNoteDetailsFragment(note);
                             Navigation.findNavController(getView()).navigate(action);
                         }
                     });
@@ -65,6 +66,8 @@ public class NoteMapFragment extends Fragment {
 
         }
     };
+
+
 
     @Nullable
     @Override
@@ -83,5 +86,12 @@ public class NoteMapFragment extends Fragment {
         if (mapFragment != null) {
             mapFragment.getMapAsync(callback);
         }
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        Model.instance().getAllNotes((list)->{data=list;
+        });
+        super.onAttach(context);
     }
 }

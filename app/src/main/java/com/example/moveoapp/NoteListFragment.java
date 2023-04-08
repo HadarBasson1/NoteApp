@@ -33,7 +33,7 @@ public class NoteListFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        reloadData();
+//        reloadData();
     }
 
     @Override
@@ -57,7 +57,7 @@ public class NoteListFragment extends Fragment {
 
                 Log.d("TAG", "Row was clicked " + pos);
                 Note note = data.get(pos);
-                NoteListFragmentDirections.ActionNoteListFragmentToNoteDetailsFragment action = NoteListFragmentDirections.actionNoteListFragmentToNoteDetailsFragment(note.getTitle(),note.getBody(),note.getDate());
+                NoteListFragmentDirections.ActionNoteListFragmentToNoteDetailsFragment action = NoteListFragmentDirections.actionNoteListFragmentToNoteDetailsFragment(note);
                 Navigation.findNavController(view).navigate(action);
             }
         });

@@ -1,6 +1,7 @@
 package com.example.moveoapp;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -34,6 +35,7 @@ import com.google.android.gms.tasks.Task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Handler;
 
 
 public class AddNoteFragment extends Fragment {
@@ -81,24 +83,6 @@ FusedLocationProviderClient client;
                         requestPermissions(new String[] {Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION },100);
                     }
 
-//                String title = binding.addNoteFragmentTitle.getText().toString();
-//                String body = binding.addNoteFragmentBody.getText().toString();
-//                String key = RandomKeyGenerator.generateRandomKey();
-//                String formattedDateTime="";
-//                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-//                    LocalDateTime currentDateTime = LocalDateTime.now();
-//                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-//                    formattedDateTime = currentDateTime.format(formatter);
-//                }
-//
-//                Note note = new Note(title,formattedDateTime,body,key,"lala");
-//                Model.instance().insertNote(note, new Model.Listener<Void>() {
-//                    @Override
-//                    public void onComplete(Void data) {
-//                        NavController navController = Navigation.findNavController(view);
-//                        navController.navigate(R.id.action_global_noteListFragment);
-//                    }
-//                });
             }
         });
 
@@ -165,8 +149,25 @@ FusedLocationProviderClient client;
                                 Model.instance().insertNote(note, new Model.Listener<Void>() {
                                     @Override
                                     public void onComplete(Void data) {
-                                        NavController navController = Navigation.findNavController(v);
-                                        navController.navigate(R.id.action_global_noteListFragment);
+                                        // Create an AlertDialog.Builder object
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                        // Set the message to display in the dialog box
+                                        builder.setMessage("Note successfully added");
+                                        // Create and show the dialog box
+                                        AlertDialog dialog = builder.create();
+                                        dialog.show();
+
+                                        new android.os.Handler().postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                dialog.dismiss();
+                                                NavController navController = Navigation.findNavController(v);
+                                                navController.popBackStack();
+                                            }
+                                        }, 1000);
+
+//                                        NavController navController = Navigation.findNavController(v);
+//                                        navController.popBackStack();
                                     }
                                 });
 
