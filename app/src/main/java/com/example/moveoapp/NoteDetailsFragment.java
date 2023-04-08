@@ -68,6 +68,14 @@ public class NoteDetailsFragment extends Fragment {
             }
         });
 
+        binding.noteDetailsEditBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NoteDetailsFragmentDirections.ActionNoteDetailsFragmentToEditNoteFragment action = NoteDetailsFragmentDirections.actionNoteDetailsFragmentToEditNoteFragment(note);
+                Navigation.findNavController(v).navigate(action);
+            }
+        });
+
         return view;
     }
 }

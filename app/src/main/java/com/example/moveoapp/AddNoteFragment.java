@@ -35,6 +35,8 @@ import com.google.android.gms.tasks.Task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Handler;
 
 
@@ -46,7 +48,6 @@ FusedLocationProviderClient client;
     public AddNoteFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -108,6 +109,8 @@ FusedLocationProviderClient client;
             Toast.makeText(getActivity(),"Permission denied",Toast.LENGTH_SHORT).show();
         }
     }
+
+
 
     @SuppressLint("MissingPermission")
     private void getCurrentLocation(View v)
@@ -197,15 +200,6 @@ FusedLocationProviderClient client;
                         }
                     });
         }
-//        else {
-//            // When location service is not enabled
-//            // open location setting
-//            startActivity(
-//                    new Intent(
-//                            Settings
-//                                    .ACTION_LOCATION_SOURCE_SETTINGS)
-//                            .setFlags(
-//                                    Intent.FLAG_ACTIVITY_NEW_TASK));
-//        }
+
     }
 }
