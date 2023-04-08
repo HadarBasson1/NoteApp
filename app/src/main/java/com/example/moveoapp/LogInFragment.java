@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +37,15 @@ public class LogInFragment extends Fragment {
             public void onClick(View v) {
                 emailInput= binding.loginFragmentEmailInput.getText().toString();
                 passwordInput= binding.loginFragmentPasswordInput.getText().toString();
+
+                if(TextUtils.isEmpty(emailInput)){
+                    Toast.makeText(getContext(),"Enter Email",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(TextUtils.isEmpty(passwordInput)){
+                    Toast.makeText(getContext(),"Enter Password",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Model.instance().login(emailInput, passwordInput, new
                         Model.Listener<FirebaseUser>() {
                             @Override

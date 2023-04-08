@@ -24,7 +24,10 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
-        android:background="#f1ff"
+        android:background="#01baef"
+        android:outlineSpotShadowColor="#20bf55"
+app:rippleColor="#20bf55"
+        android:backgroundTint="#0b4f6c"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
@@ -40,7 +43,7 @@
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#004e89"
+        android:background="#01baef"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

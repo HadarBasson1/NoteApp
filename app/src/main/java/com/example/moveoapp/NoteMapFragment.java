@@ -5,8 +5,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,22 +45,47 @@ public class NoteMapFragment extends Fragment {
             googleMap.clear();
             Model.instance().getAllNotes((list)->{
                 data=list;
-                for (Note note : data) {
-                    LatLng location=new LatLng(Double.parseDouble(note.getLatitude()), Double.parseDouble(note.getLongitude()));
-                    MarkerOptions markerOptions = new MarkerOptions();
-                    markerOptions.position(location).title(note.getTitle());
-                    googleMap.addMarker(markerOptions);
-
-                    googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                if (data.isEmpty()) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setMessage("There are no notes yet");
+                    // Create and show the dialog box
+                    builder.setPositiveButton("Add now", new DialogInterface.OnClickListener() {
                         @Override
-                        public void onInfoWindowClick(Marker marker) {
-                            NoteMapFragmentDirections.ActionNoteMapFragmentToNoteDetailsFragment action = NoteMapFragmentDirections.actionNoteMapFragmentToNoteDetailsFragment(note);
-                            Navigation.findNavController(getView()).navigate(action);
+                        public void onClick(DialogInterface dialog, int which) {
+                            Navigation.findNavController(getView()).navigate(R.id.action_global_addNoteFragment);
                         }
                     });
 
+                    // Set a negative button and its listener
+                    builder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
 
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
                 }
+                else {
+                    for (Note note : data) {
+                        LatLng location=new LatLng(Double.parseDouble(note.getLatitude()), Double.parseDouble(note.getLongitude()));
+                        MarkerOptions markerOptions = new MarkerOptions();
+                        markerOptions.position(location).title(note.getTitle());
+                        googleMap.addMarker(markerOptions);
+
+                        googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                            @Override
+                            public void onInfoWindowClick(Marker marker) {
+                                NoteMapFragmentDirections.ActionNoteMapFragmentToNoteDetailsFragment action = NoteMapFragmentDirections.actionNoteMapFragmentToNoteDetailsFragment(note);
+                                Navigation.findNavController(getView()).navigate(action);
+                            }
+                        });
+
+
+                    }
+                }
+
 //                LatLng sydney = new LatLng(-34, 151);
 //                googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
 //                googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));

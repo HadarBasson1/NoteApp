@@ -1,12 +1,15 @@
 package com.example.moveoapp;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -27,13 +30,11 @@ public class NoteListFragment extends Fragment {
 
     FragmentNoteListBinding binding;
     NoteRecyclerAdapter adapter;
-//    NListFragmentViewModel viewModel;
     List<Note> data;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        reloadData();
     }
 
     @Override
@@ -42,54 +43,53 @@ public class NoteListFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentNoteListBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-        Model.instance().getAllNotes((list)->{
-            data=list;
+        Model.instance().getAllNotes((list) -> {
+            data = list;
             adapter.setData(data);
-        });
-        binding.notelist.setHasFixedSize(true);
-        binding.notelist.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new NoteRecyclerAdapter(getLayoutInflater(),data);
-        binding.notelist.setAdapter(adapter);
+            adapter.setOnItemClickListener(new NoteRecyclerAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(int pos) {
 
-        adapter.setOnItemClickListener(new NoteRecyclerAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int pos) {
+                    Log.d("TAG", "Row was clicked " + pos);
+                    Note note = data.get(pos);
+                    NoteListFragmentDirections.ActionNoteListFragmentToNoteDetailsFragment action = NoteListFragmentDirections.actionNoteListFragmentToNoteDetailsFragment(note);
+                    Navigation.findNavController(view).navigate(action);
+                }
+            });
 
-                Log.d("TAG", "Row was clicked " + pos);
-                Note note = data.get(pos);
-                NoteListFragmentDirections.ActionNoteListFragmentToNoteDetailsFragment action = NoteListFragmentDirections.actionNoteListFragmentToNoteDetailsFragment(note);
-                Navigation.findNavController(view).navigate(action);
+            if (data.isEmpty()) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setMessage("There are no notes yet");
+                // Create and show the dialog box
+                builder.setPositiveButton("Add now", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Navigation.findNavController(getView()).navigate(R.id.action_global_addNoteFragment);
+                    }
+                });
+
+                // Set a negative button and its listener
+                builder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
             }
         });
 
-//        View addButton = view.findViewById(R.id.btnAdd);
-//        NavDirections action = StudentsListFragmentDirections.actionGlobalAddStudentFragment();
-//        addButton.setOnClickListener(Navigation.createNavigateOnClickListener(action));
+        binding.notelist.setHasFixedSize(true);
+        binding.notelist.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter = new NoteRecyclerAdapter(getLayoutInflater(), data);
+        binding.notelist.setAdapter(adapter);
 
-//        binding.progressBar.setVisibility(View.GONE);
-
-//        viewModel.getData().observe(getViewLifecycleOwner(),list->{
-//            adapter.setData(list);
-//        });
-
-//        Model.instance().EventStudentsListLoadingState.observe(getViewLifecycleOwner(), status->{
-//            binding.swipeRefresh.setRefreshing(status == Model.LoadingState.LOADING);
-//        });
-//
-//        binding.swipeRefresh.setOnRefreshListener(()->{
-//            reloadData();
-//        });
 
         return view;
     }
 
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        reloadData();
-//        viewModel = new ViewModelProvider(this).get(StudentsListFragmentViewModel.class);
-    }
 
-    void reloadData(){
-    }
 }

@@ -16,6 +16,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,6 +81,23 @@ public class SingUpFragment extends Fragment {
                 emailInput= binding.singUpEmailInput.getText().toString();
                 passwordInput= binding.singUpPasswordInput.getText().toString();
                 nameInput= binding.singUpNameInput.getText().toString();
+
+                if(TextUtils.isEmpty(nameInput)){
+                    Toast.makeText(getContext(),"Enter Name",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(TextUtils.isEmpty(emailInput)){
+                    Toast.makeText(getContext(),"Enter Email",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(TextUtils.isEmpty(passwordInput)){
+                    Toast.makeText(getContext(),"Enter Password",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+
+
                 Model.instance().regiser(emailInput, passwordInput,nameInput, new Model.Listener<User>() {
                     @Override
                     public void onComplete(User user) {

@@ -21,7 +21,7 @@
         android:layout_height="60dp"
         android:layout_marginTop="84dp"
         android:gravity="center"
-        android:text="Moveo Group"
+        android:text="PinPoint Notes"
 
         android:textColor="#01baef"
         android:textSize="34sp"
@@ -37,7 +37,7 @@
         android:layout_height="144dp"
         android:layout_marginTop="100dp"
         android:gravity="center"
-        android:text="It doesn't matter if it's Product, Branding, Design, or Coding - We do it all. Working in full sync to deliver the highest standards of technology and creativeness."
+        android:text="Keep track of your ideas by tying them to specific locations with our app."
         android:textColor="#757575"
         android:textSize="18dp"
         android:textStyle="bold"
