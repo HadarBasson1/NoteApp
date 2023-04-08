@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.moveoapp.Model.Model;
+import com.example.moveoapp.Model.User;
 import com.example.moveoapp.databinding.FragmentLogInBinding;
 import com.example.moveoapp.databinding.FragmentSingUpBinding;
 import com.google.firebase.auth.FirebaseUser;
@@ -41,12 +42,12 @@ public class LogInFragment extends Fragment {
                             public void onComplete(FirebaseUser user) {
                                 if(user!=null){
                                     String email = user.getEmail();
-                                    Model.instance().findNameByEmail(email, new Model.Listener<String>() {
+                                    Model.instance().getUserByEmail(email, new Model.Listener<User>() {
                                         @Override
-                                        public void onComplete(String name) {
+                                        public void onComplete(User user1) {
                                             Log.d(TAG, "createUserWithEmail:success From SingUp Page!!!!!!!!");
                                             Intent intent = new Intent(getActivity().getApplicationContext(), MainActivity2.class);
-                                            intent.putExtra("name",name);
+                                            intent.putExtra("user",user1);
                                             startActivity(intent);
                                             getActivity().finish();
                                         }

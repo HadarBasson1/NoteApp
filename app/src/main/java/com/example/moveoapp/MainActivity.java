@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.moveoapp.Model.Model;
+import com.example.moveoapp.Model.User;
 
 public class MainActivity extends AppCompatActivity {
     NavController navController;
@@ -24,11 +25,11 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this,navController);
         if(Model.instance().currentUser()!=null){
             String email=Model.instance().currentUser();
-            Model.instance().findNameByEmail(email, new Model.Listener<String>() {
+            Model.instance().getUserByEmail(email, new Model.Listener<User>() {
                 @Override
-                public void onComplete(String name) {
+                public void onComplete(User user) {
                     Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
-                    intent.putExtra("name",name);
+                    intent.putExtra("user",user);
                     startActivity(intent);
                     finish();
                 }

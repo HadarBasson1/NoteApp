@@ -1,5 +1,6 @@
 package com.example.moveoapp.Model;
 
+import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Looper;
 
@@ -34,6 +35,13 @@ public class Model {
         });
     }
 
+    public void getUserByEmail(String email, Listener<User> callback) {
+        executor.execute(()->{
+            User user = localDb.userDao().getUserByEmail(email);
+            mainHandler.post(()->{
+                callback.onComplete(user);
+            });
+        });    }
 
 
     public interface Listener<T>{
@@ -101,6 +109,10 @@ public class Model {
                 callback.onComplete(null);
             });
         });
+    }
+
+    public void uploadImage(String name, Bitmap bitmap, Listener<String> listener) {
+        firebaseModel.uploadImage(name,bitmap,listener);
     }
 
 

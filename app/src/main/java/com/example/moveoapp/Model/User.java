@@ -11,16 +11,17 @@ import androidx.room.PrimaryKey;
 import com.example.moveoapp.MyApplication;
 import com.google.firebase.firestore.FieldValue;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 @Entity
-public class User {
+public class User implements Serializable {
     @PrimaryKey
     @NonNull
     public String email="";
     public String name="";
-//    public String imgUrl="";
+    public String imgUrl="";
     public Long lastUpdated=0L;
 
 
@@ -28,16 +29,16 @@ public class User {
     public User(){
     }
 
-    public User(String name, @NonNull String email) {
+    public User(String name, @NonNull String email,String imgUrl) {
         this.name = name;
         this.email=email;
-//        this.imgUrl = imgUrl;
+        this.imgUrl = imgUrl;
     }
 
 //    static final String ID = "id";
     static final String NAME = "name";
     static final String EMAIL = "email";
-//    static final String AVATAR = "avatar";
+    static final String IMG_URL = "imgUrl";
     static final String COLLECTION = "users";
     static final String LAST_UPDATED = "lastUpdated";
     static final String LOCAL_LAST_UPDATED = "user_local_last_update";
@@ -46,8 +47,8 @@ public class User {
         String name = (String)json.get(NAME);
         String email = (String)json.get(EMAIL);
 //        String id = (String)json.get(ID);
-//        String avatar = (String)json.get(AVATAR);
-        User user = new User(name,email);
+        String imgUrl = (String)json.get(IMG_URL);
+        User user = new User(name,email,imgUrl);
         try{
             Timestamp time = (Timestamp) json.get(LAST_UPDATED);
             user.setLastUpdated((long) time.getSeconds());
@@ -64,7 +65,7 @@ public class User {
         json.put(NAME, getName());
         json.put(EMAIL, getEmail());
 //        json.put(ID, getId());
-//        json.put(AVATAR, getImgUrl());
+        json.put(IMG_URL,getImgUrl());
         json.put(LAST_UPDATED, FieldValue.serverTimestamp());
         return json;
     }
@@ -78,9 +79,10 @@ public class User {
     }
 
 //
-//    public void setImgUrl(String imgUrl) {
-//        this.imgUrl = imgUrl;
-//    }
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
 
     private void setLastUpdated(long lastUpdated) {
         this.lastUpdated = lastUpdated;
@@ -112,11 +114,13 @@ public class User {
     }
 
 
-//    public String getImgUrl() {
-//        return imgUrl;
-//    }
+    public String getImgUrl() {
+        return imgUrl;
+    }
 
     public Long getLastUpdated() {
         return lastUpdated;
     }
+
+
 }

@@ -20,18 +20,19 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.example.moveoapp.Model.Model;
+import com.example.moveoapp.Model.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity2 extends AppCompatActivity {
     NavController navController;
     FloatingActionButton addBtn;
-    static String name;
+    static User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-         name = getIntent().getStringExtra("name");
+         user = (User) getIntent().getSerializableExtra("user");
         NavHostFragment navHostFragment= (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host2);
         navController = navHostFragment.getNavController();
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);

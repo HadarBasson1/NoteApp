@@ -7,33 +7,35 @@
     tools:context=".SingUpFragment">
 
     <ImageView
-        android:id="@+id/background_image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/background2"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-73dp" />
+        android:id="@+id/sing_up_gallery"
+        android:layout_width="0dp"
+        android:layout_height="192dp"
+        app:layout_constraintBottom_toTopOf="@+id/background_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.307"
+        app:srcCompat="@android:drawable/ic_menu_gallery" />
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="223dp"
-        android:layout_height="83dp"
-        android:layout_marginTop="132dp"
-        android:gravity="center"
-        android:text="Create New Account"
-        android:textSize="24sp"
+    <ImageView
+        android:id="@+id/background_image"
+        android:layout_width="412dp"
+        android:layout_height="539dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/note"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/sing_up_gallery" />
 
     <EditText
         android:id="@+id/sing_up_name_input"
         android:layout_width="285dp"
         android:layout_height="66dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="96dp"
         android:background="@drawable/edt_background"
-        android:backgroundTint="#F6EDED"
+        android:backgroundTint="#fbfbff"
         android:drawableLeft="@drawable/ic_baseline_person_24"
         android:drawablePadding="10dp"
         android:ems="10"
@@ -42,7 +44,7 @@
         android:paddingLeft="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/sing_up_gallery"
         tools:ignore="DuplicateSpeakableTextCheck" />
 
     <EditText
@@ -51,7 +53,8 @@
         android:layout_height="66dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/edt_background"
-        android:backgroundTint="#F6EDED"
+        android:backgroundTint="#fbfbff"
+
         android:drawableLeft="@drawable/ic_baseline_email_24"
         android:drawablePadding="10dp"
         android:ems="10"
@@ -69,7 +72,7 @@
         android:layout_height="66dp"
         android:layout_marginTop="40dp"
         android:background="@drawable/edt_background"
-        android:backgroundTint="#F6EDED"
+        android:backgroundTint="#fbfbff"
         android:drawableLeft="@drawable/ic_baseline_lock_24"
         android:drawablePadding="10dp"
         android:ems="10"
@@ -85,11 +88,27 @@
         android:layout_width="123dp"
         android:layout_height="57dp"
         android:text="Sing Up"
+        android:textColor="#fbfbff"
+        android:textStyle="bold"
+        android:background="@drawable/custom_button"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sing_up_password_input"
         app:layout_constraintVertical_bias="0.483" />
+
+    <ImageView
+        android:id="@+id/sing_up_camera"
+        android:layout_width="83dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="12dp"
+        android:src="@android:drawable/ic_menu_camera"
+        app:layout_constraintBottom_toBottomOf="@+id/sing_up_gallery"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

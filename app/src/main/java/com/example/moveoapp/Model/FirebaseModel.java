@@ -2,12 +2,16 @@ package com.example.moveoapp.Model;
 
 import static android.content.ContentValues.TAG;
 
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -15,7 +19,11 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.util.concurrent.Executor;
 
 public class FirebaseModel {
@@ -23,12 +31,14 @@ public class FirebaseModel {
     static FirebaseAuth mAuth;
     static FirebaseUser user;
     static FirebaseFirestore db;
+    FirebaseStorage storage;
 
 
     FirebaseModel(){
         mAuth=FirebaseAuth.getInstance();
         user=mAuth.getCurrentUser();
         db=FirebaseFirestore.getInstance();
+        storage = FirebaseStorage.getInstance();
     }
 
 
@@ -48,7 +58,7 @@ public class FirebaseModel {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             user = mAuth.getCurrentUser();
-                            User new_user = new User(name,email);
+                            User new_user = new User(name,email,"");
                             listener.onComplete(new_user);
 //                            db.collection(User.COLLECTION).document(new_user.getEmail()).set(new_user.toJson())
 //                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -110,6 +120,33 @@ public class FirebaseModel {
                 }
             }
         });
+    }
+
+    void uploadImage(String name, Bitmap bitmap, Model.Listener<String> listener){
+        StorageReference storageRef = storage.getReference();
+        StorageReference imagesRef = storageRef.child("images/" + name +".jpg");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] data = baos.toByteArray();
+
+        UploadTask uploadTask = imagesRef.putBytes(data);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                listener.onComplete(null);
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                imagesRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        listener.onComplete(uri.toString());
+                    }
+                });
+            }
+        });
+
     }
 
 

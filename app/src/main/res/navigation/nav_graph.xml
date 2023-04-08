@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/LandingPage"
         android:name="com.example.moveoapp.LandingPageFragment"
-        android:label="Login"
-        tools:layout="@layout/fragment_landing_page" >
+        android:label="My Note App"
+        tools:layout="@layout/fragment_landing_page">
         <action
             android:id="@+id/action_loginFragment_to_singUpFragment"
             app:destination="@id/singUpFragment" />
@@ -20,11 +20,11 @@
     <fragment
         android:id="@+id/singUpFragment"
         android:name="com.example.moveoapp.SingUpFragment"
-        android:label="fragment_sing_up"
+        android:label="Sing Up"
         tools:layout="@layout/fragment_sing_up" />
     <fragment
         android:id="@+id/logInFragment"
         android:name="com.example.moveoapp.LogInFragment"
-        android:label="fragment_log_in"
+        android:label="Log In"
         tools:layout="@layout/fragment_log_in" />
 </navigation>

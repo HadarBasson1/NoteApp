@@ -11,6 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
+        android:alpha="0.4"
+
         android:src="@drawable/note" />
 
     <TextView
@@ -20,7 +22,8 @@
         android:layout_marginTop="84dp"
         android:gravity="center"
         android:text="Moveo Group"
-        android:textColor="#FFFFFF"
+
+        android:textColor="#01baef"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +38,9 @@
         android:layout_marginTop="100dp"
         android:gravity="center"
         android:text="It doesn't matter if it's Product, Branding, Design, or Coding - We do it all. Working in full sync to deliver the highest standards of technology and creativeness."
-        android:textColor="#FFFFFF"
+        android:textColor="#757575"
+        android:textSize="18dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +53,10 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/custom_button"
         android:text="Log In"
+        android:textStyle="bold"
+
         android:textColor="#FEFEFE"
+        android:backgroundTint="#20bf55"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,6 +70,8 @@
         android:layout_marginTop="104dp"
         android:background="@drawable/custom_button"
         android:text="Sing Up"
+        android:textStyle="bold"
+
         android:textColor="#FEFEFE"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
