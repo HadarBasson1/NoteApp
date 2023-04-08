@@ -36,8 +36,6 @@ import com.google.android.gms.tasks.Task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 
 public class EditNoteFragment extends Fragment {
     FragmentEditNoteBinding binding;
@@ -64,7 +62,7 @@ public class EditNoteFragment extends Fragment {
         binding.editNoteSaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getLenLon();
+                locationPremission();
             }
         });
 
@@ -72,12 +70,12 @@ public class EditNoteFragment extends Fragment {
     }
 
 
-    public void getLocation(){
+    public void locationPremission(){
         if (ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                 && ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_COARSE_LOCATION)== PackageManager.PERMISSION_GRANTED) {
             // When permission is granted
             // Call method
-            getLenLon();
+            editNote();
         }
         else {
             // When permission is not granted
@@ -88,7 +86,7 @@ public class EditNoteFragment extends Fragment {
     }
 
     @SuppressLint("MissingPermission")
-    private  void getLenLon()
+    private  void editNote()
     {
         // Initialize Location manager
         LocationManager locationManager= (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
@@ -180,7 +178,7 @@ public class EditNoteFragment extends Fragment {
         if (requestCode == 100 && (grantResults.length > 0) && (grantResults[0] + grantResults[1] == PackageManager.PERMISSION_GRANTED)) {
             // When permission are granted
             // Call  method
-            getLenLon();
+            editNote();
         }
         else {
             // When permission are denied
