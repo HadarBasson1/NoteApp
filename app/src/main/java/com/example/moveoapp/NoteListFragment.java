@@ -87,7 +87,6 @@ public class NoteListFragment extends Fragment {
         binding.notelist.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new NoteRecyclerAdapter(getLayoutInflater(), data);
         binding.notelist.setAdapter(adapter);
-
         FloatingActionButton addBtn = requireActivity().findViewById(R.id.floatingActionButton);
         addBtn.setVisibility(View.VISIBLE);
 

@@ -26,25 +26,17 @@ public class NoteDetailsFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentNoteDetailsBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-//        String title=NoteDetailsFragmentArgs.fromBundle(getArguments()).getTitle();
-//        String body=NoteDetailsFragmentArgs.fromBundle(getArguments()).getBody();
-//        String date=NoteDetailsFragmentArgs.fromBundle(getArguments()).getDate();
         Note note= NoteDetailsFragmentArgs.fromBundle(getArguments()).getNote();
         binding.noteDetailsTitle.setText(note.getTitle());
         binding.noteDetailsBody.setText(note.getBody());
         binding.noteDetailsDate.setText(note.getDate());
-
         binding.noteDetailsDeleteBtn.setOnClickListener(new View.OnClickListener() {
-
-
             @Override
             public void onClick(View v) {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 // Set the message to display in the dialog box
                 builder.setMessage("Warning:Remove the note?");
-                // Create and show the dialog box
-
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -54,14 +46,12 @@ public class NoteDetailsFragment extends Fragment {
                     }
                 });
 
-                // Set a negative button and its listener
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                     }
                 });
-
                 AlertDialog dialog = builder.create();
                 dialog.show();
 

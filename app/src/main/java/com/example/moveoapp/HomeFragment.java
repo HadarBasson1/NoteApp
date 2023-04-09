@@ -26,13 +26,6 @@ import com.squareup.picasso.Picasso;
 
 public class HomeFragment extends Fragment {
   FragmentHomeBinding binding;
-    String name;
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-    }
-
 
 
     @Override
@@ -41,18 +34,17 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+        String imageUrl=null;
         if(MainActivity2.user==null)
             binding.homeWelcomMsg.setText("Welcome");
         else{
             binding.homeWelcomMsg.setText("Welcome "+MainActivity2.user.getName());
-            String imageUrl = MainActivity2.user.getImgUrl();
-//                Picasso.get().invalidate(user.getImgUrl()); // clear the cache for the old URL
-//                String imageUrl = user.getImgUrl() + System.currentTimeMillis();
-            if (imageUrl  != null && imageUrl.length() > 5) {
-                Picasso.get().load(imageUrl).placeholder(R.drawable.profile).into(binding.homeImage);
-            }else{
-                binding.homeImage.setImageResource(R.drawable.profile);
-            }
+            imageUrl = MainActivity2.user.getImgUrl();
+        }
+        if (imageUrl  != null && imageUrl.length() > 5) {
+            Picasso.get().load(imageUrl).placeholder(R.drawable.profile).into(binding.homeImage);
+        }else{
+            binding.homeImage.setImageResource(R.drawable.profile);
         }
 
         FloatingActionButton addBtn = requireActivity().findViewById(R.id.floatingActionButton);
@@ -61,10 +53,5 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-    }
 
 }

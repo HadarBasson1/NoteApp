@@ -45,8 +45,6 @@ public class NoteMapFragment extends Fragment {
                             Navigation.findNavController(getView()).navigate(R.id.action_global_addNoteFragment);
                         }
                     });
-
-                    // Set a negative button and its listener
                     builder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -71,17 +69,9 @@ public class NoteMapFragment extends Fragment {
                                 Navigation.findNavController(getView()).navigate(action);
                             }
                         });
-
-
                     }
                 }
-
-//                LatLng sydney = new LatLng(-34, 151);
-//                googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-//                googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
             });
-
-
         }
     };
 

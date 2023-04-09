@@ -41,18 +41,15 @@ import java.time.format.DateTimeFormatter;
 public class EditNoteFragment extends Fragment {
     FragmentEditNoteBinding binding;
     FusedLocationProviderClient client;
-//    String Latitude;
-//    String Longitude;
     Note note;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentEditNoteBinding.inflate(inflater,container,false);
         View view = binding.getRoot();
-        client = LocationServices
-                .getFusedLocationProviderClient(
-                        getActivity());
+        client = LocationServices.getFusedLocationProviderClient(getActivity());
 
         note= EditNoteFragmentArgs.fromBundle(getArguments()).getNote();
         binding.editNotesDate.setText(note.getDate());
@@ -62,13 +59,7 @@ public class EditNoteFragment extends Fragment {
 
         FloatingActionButton addBtn = requireActivity().findViewById(R.id.floatingActionButton);
         addBtn.setVisibility(View.GONE);
-
-        binding.editNoteSaveBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                locationPremission();
-            }
-        });
+        binding.editNoteSaveBtn.setOnClickListener((v)->locationPremission());
 
         return view;
     }
@@ -78,15 +69,12 @@ public class EditNoteFragment extends Fragment {
         if (ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                 && ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_COARSE_LOCATION)== PackageManager.PERMISSION_GRANTED) {
             // When permission is granted
-            // Call method
             editNote();
         }
         else {
             // When permission is not granted
-            // Call method
             requestPermissions(new String[] {android.Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION },100);
         }
-
     }
 
     @SuppressLint("MissingPermission")
@@ -96,8 +84,7 @@ public class EditNoteFragment extends Fragment {
         LocationManager locationManager= (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
         // Check condition
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)|| locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-            // When location service is enabled
-            // Get last location
+            // When location service is enabled - Get last location
             Task<Location> note_successfully_edited = client.getLastLocation().addOnCompleteListener(
                     new OnCompleteListener<Location>() {
                         @Override
@@ -112,6 +99,7 @@ public class EditNoteFragment extends Fragment {
                                 note.setBody(binding.editTextTextMultiLine2.getText().toString());
                                 note.setDate(binding.editNoteTitle.getText().toString());
                                 String formattedDateTime = "";
+                                // current date
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                                     LocalDateTime currentDateTime = LocalDateTime.now();
                                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -121,11 +109,8 @@ public class EditNoteFragment extends Fragment {
                                 Model.instance().insertNote(note, new Model.Listener<Void>() {
                                     @Override
                                     public void onComplete(Void data) {
-                                        // Create an AlertDialog.Builder object
                                         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                                        // Set the message to display in the dialog box
                                         builder.setMessage("Note successfully edited");
-                                        // Create and show the dialog box
                                         AlertDialog dialog = builder.create();
                                         dialog.show();
                                         new Handler().postDelayed(new Runnable() {
@@ -141,18 +126,16 @@ public class EditNoteFragment extends Fragment {
 
 
                             } else {
-                                // When location result is null
-                                // initialize location request
+                                // When location result is null - initialize location request
                                 LocationRequest locationRequest = new LocationRequest().setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY).setInterval(10000).setFastestInterval(1000).setNumUpdates(1);
                                 // Initialize location call back
                                 LocationCallback locationCallback = new LocationCallback() {
                                     @Override
                                     public void
                                     onLocationResult(LocationResult locationResult) {
-                                        // Initialize
-                                        // location
+                                        // Initialize location
                                         Location location1 = locationResult.getLastLocation();
-                                        // Set latitude
+                                        // Set latitude + longitude
                                         note.setLatitude(String.valueOf(location1.getLatitude()));
                                         note.setLongitude(String.valueOf(location1.getLongitude()));
                                     }
@@ -181,12 +164,10 @@ public class EditNoteFragment extends Fragment {
         // Check condition
         if (requestCode == 100 && (grantResults.length > 0) && (grantResults[0] + grantResults[1] == PackageManager.PERMISSION_GRANTED)) {
             // When permission are granted
-            // Call  method
             editNote();
         }
         else {
-            // When permission are denied
-            // Display toast
+            // When permission are denied - Display toast
             Toast.makeText(getActivity(),"Permission denied",Toast.LENGTH_SHORT).show();
         }
     }

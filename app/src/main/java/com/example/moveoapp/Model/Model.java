@@ -26,15 +26,6 @@ public class Model {
     private Model(){
     }
 
-    public void getAllNotes(Listener<List<Note>> callback) {
-        executor.execute(()->{
-            List<Note> data = localDb.noteDao().getAll();
-            mainHandler.post(()->{
-                callback.onComplete(data);
-            });
-        });
-    }
-
 
     public void getAllNotesByEmail(String email,Listener<List<Note>> callback) {
         executor.execute(()->{
@@ -59,10 +50,6 @@ public class Model {
     }
 
 
-    public enum LoadingState{
-        LOADING,
-        NOT_LOADING
-    }
 
     public void regiser(String email, String password,String name, Listener<User> listener){
         FirebaseModel.register(email, password, name,listener);
@@ -81,9 +68,6 @@ public class Model {
     }
 
 
-//    public void findNameByEmail(String email,Listener<String>listener) {
-//        FirebaseModel.findNameByEmail(email,listener);
-//    }
 
     public void insertNote(Note note,Listener<Void> callback) {
         executor.execute(()->{
@@ -104,14 +88,6 @@ public class Model {
         });
     }
 
-    public void findNameByEmail(String email,Listener<String> callback) {
-        executor.execute(()->{
-            String name=localDb.userDao().getNameByEmail(email);
-            mainHandler.post(()->{
-                callback.onComplete(name);
-            });
-        });
-    }
 
     public void delete(Note note,Listener<Void> callback) {
             executor.execute(()->{ localDb.noteDao().delete(note);

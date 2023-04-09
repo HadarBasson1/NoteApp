@@ -15,29 +15,16 @@ import java.util.List;
 
 
 class NoteViewHolder extends RecyclerView.ViewHolder {
-    //    TextView nameTv;
     TextView titelTv;
     TextView dateTv;
-//    CheckBox cb;
     List<Note> data;
-//    ImageView avatarImage;
+
 
     public NoteViewHolder(@NonNull View itemView, NoteRecyclerAdapter.OnItemClickListener listener, List<Note> data) {
         super(itemView);
         this.data = data;
         titelTv = itemView.findViewById(R.id.note_title);
         dateTv=itemView.findViewById(R.id.note_date);
-//        idTv = itemView.findViewById(R.id.studentlistrow_id_tv);
-//        avatarImage = itemView.findViewById(R.id.studentlistrow_avatar_img);
-//        cb = itemView.findViewById(R.id.studentlistrow_cb);
-//        cb.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                int pos = (int)cb.getTag();
-//                Student st = data.get(pos);
-//                st.cb = cb.isChecked();
-//            }
-//        });
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,16 +37,6 @@ class NoteViewHolder extends RecyclerView.ViewHolder {
     public void bind(Note note, int pos) {
         titelTv.setText(note.getTitle());
         dateTv.setText(note.getDate());
-
-//        idTv.setText(st.id);
-//        cb.setChecked(st.cb);
-//        cb.setTag(pos);
-//        if (st.getAvatarUrl()  != null && st.getAvatarUrl().length() > 5) {
-//            Picasso.get().load(st.getAvatarUrl()).placeholder(R.drawable.avatar).into(avatarImage);
-//        }else{
-//            avatarImage.setImageResource(R.drawable.avatar);
-//        }
-//    }
     }
 }
 public class NoteRecyclerAdapter  extends RecyclerView.Adapter<NoteViewHolder>{

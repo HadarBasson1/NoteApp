@@ -47,16 +47,6 @@ FusedLocationProviderClient client;
     String Latitude;
     String Longitude;
     public AddNoteFragment() {
-        // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
     }
 
     @Override
@@ -73,15 +63,12 @@ FusedLocationProviderClient client;
             @Override
             public void onClick(View v) {
                     // check condition
-                    if (ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                            && ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.ACCESS_COARSE_LOCATION)== PackageManager.PERMISSION_GRANTED) {
+                    if (ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.ACCESS_COARSE_LOCATION)== PackageManager.PERMISSION_GRANTED) {
                         // When permission is granted
-                        // Call method
                         getCurrentLocation(v);
                     }
                     else {
                         // When permission is not granted
-                        // Call method
                         requestPermissions(new String[] {Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION },100);
                     }
 
@@ -103,13 +90,11 @@ FusedLocationProviderClient client;
                 requestCode, permissions, grantResults);
         // Check condition
         if (requestCode == 100 && (grantResults.length > 0) && (grantResults[0] + grantResults[1] == PackageManager.PERMISSION_GRANTED)) {
-            // When permission are granted
-            // Call  method
+            // When permission are granted - Call  method
             getCurrentLocation(getView());
         }
         else {
             // When permission are denied
-            // Display toast
             Toast.makeText(getActivity(),"Permission denied",Toast.LENGTH_SHORT).show();
         }
     }
@@ -123,8 +108,7 @@ FusedLocationProviderClient client;
         LocationManager locationManager= (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
         // Check condition
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)|| locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-            // When location service is enabled
-            // Get last location
+            // When location service is enabled- Get last location
             client.getLastLocation().addOnCompleteListener(
                     new OnCompleteListener<Location>() {
                         @Override
@@ -135,17 +119,14 @@ FusedLocationProviderClient client;
                             Location location= task.getResult();
                             // Check condition
                             if (location != null) {
-                                // When location result is not
-                                // null set latitude
+                                // null set latitude +longitude
                                 Latitude = String.valueOf(location.getLatitude());
-                                // set longitude
                                 Longitude =String.valueOf(location.getLongitude());
-                                Log.d("tag","lati"+ Latitude +"********************");
-                                Log.d("tag","long"+ Longitude +"********************");
                                 String title = binding.addNoteFragmentTitle.getText().toString();
                                 String body = binding.addNoteFragmentBody.getText().toString();
                                 String key = RandomKeyGenerator.generateRandomKey();
                                 String formattedDateTime="";
+                                //current time
                                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                                     LocalDateTime currentDateTime = LocalDateTime.now();
                                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -156,11 +137,8 @@ FusedLocationProviderClient client;
                                 Model.instance().insertNote(note, new Model.Listener<Void>() {
                                     @Override
                                     public void onComplete(Void data) {
-                                        // Create an AlertDialog.Builder object
                                         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                                        // Set the message to display in the dialog box
                                         builder.setMessage("Note successfully added");
-                                        // Create and show the dialog box
                                         AlertDialog dialog = builder.create();
                                         dialog.show();
 
@@ -173,16 +151,13 @@ FusedLocationProviderClient client;
                                             }
                                         }, 1000);
 
-//                                        NavController navController = Navigation.findNavController(v);
-//                                        navController.popBackStack();
                                     }
                                 });
 
 
                             }
                             else {
-                                // When location result is null
-                                // initialize location request
+                                // When location result is null - initialize location request
                                 LocationRequest locationRequest= new LocationRequest().setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY).setInterval(10000).setFastestInterval(1000).setNumUpdates(1);
                                 // Initialize location call back
                                 LocationCallback locationCallback= new LocationCallback() {
@@ -190,10 +165,9 @@ FusedLocationProviderClient client;
                                     public void
                                     onLocationResult(LocationResult locationResult)
                                     {
-                                        // Initialize
-                                        // location
+                                        // Initialize location
                                         Location location1= locationResult.getLastLocation();
-                                        // Set latitude
+                                        // Set latitude + longitude
                                         Latitude = String.valueOf(location1.getLatitude());
                                         Longitude =String.valueOf(location1.getLongitude());
                                     }

@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 10,
-    "identityHash": "3bcaac462713343c0256ce8176a28989",
+    "identityHash": "278120bf8d83974e3c0b0608638fb8a3",
     "entities": [
       {
         "tableName": "Note",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`key` TEXT NOT NULL, `title` TEXT, `date` TEXT, `body` TEXT, `editor` TEXT, `lastUpdated` INTEGER, `latitude` TEXT, `longitude` TEXT, PRIMARY KEY(`key`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`key` TEXT NOT NULL, `title` TEXT, `date` TEXT, `body` TEXT, `editor` TEXT, `latitude` TEXT, `longitude` TEXT, PRIMARY KEY(`key`))",
         "fields": [
           {
             "fieldPath": "key",
@@ -39,12 +39,6 @@
             "notNull": false
           },
           {
-            "fieldPath": "lastUpdated",
-            "columnName": "lastUpdated",
-            "affinity": "INTEGER",
-            "notNull": false
-          },
-          {
             "fieldPath": "latitude",
             "columnName": "latitude",
             "affinity": "TEXT",
@@ -68,7 +62,7 @@
       },
       {
         "tableName": "User",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`email` TEXT NOT NULL, `name` TEXT, `imgUrl` TEXT, `lastUpdated` INTEGER, PRIMARY KEY(`email`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`email` TEXT NOT NULL, `name` TEXT, `imgUrl` TEXT, PRIMARY KEY(`email`))",
         "fields": [
           {
             "fieldPath": "email",
@@ -87,12 +81,6 @@
             "columnName": "imgUrl",
             "affinity": "TEXT",
             "notNull": false
-          },
-          {
-            "fieldPath": "lastUpdated",
-            "columnName": "lastUpdated",
-            "affinity": "INTEGER",
-            "notNull": false
           }
         ],
         "primaryKey": {
@@ -108,7 +96,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3bcaac462713343c0256ce8176a28989')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '278120bf8d83974e3c0b0608638fb8a3')"
     ]
   }
 }

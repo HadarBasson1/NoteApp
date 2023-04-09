@@ -38,6 +38,7 @@ public class LogInFragment extends Fragment {
                 emailInput= binding.loginFragmentEmailInput.getText().toString();
                 passwordInput= binding.loginFragmentPasswordInput.getText().toString();
 
+                //login verification
                 if(TextUtils.isEmpty(emailInput)){
                     Toast.makeText(getContext(),"Enter Email",Toast.LENGTH_SHORT).show();
                     return;

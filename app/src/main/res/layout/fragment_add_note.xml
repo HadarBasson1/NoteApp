@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:alpha="0.4"
-        android:src="@drawable/paper" />
+        android:src="@drawable/paper_texture" />
 
     <TextView
         android:id="@+id/textView"
@@ -37,9 +37,8 @@
         android:backgroundTint="#FFFFFF"
         android:drawablePadding="10dp"
         android:ems="10"
-
         android:hint="Enter the note text"
-        android:inputType="textPersonName"
+        android:inputType="textMultiLine"f
         android:textAlignment="center"
         android:textColor="#000000"
         android:textColorHint="#BFBFBF"

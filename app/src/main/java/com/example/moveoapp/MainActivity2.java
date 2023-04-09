@@ -36,34 +36,12 @@ public class MainActivity2 extends AppCompatActivity {
         NavHostFragment navHostFragment= (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host2);
         navController = navHostFragment.getNavController();
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        bottomNavigationView.findViewById(R.id.noteMapFragment).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navController.navigate(R.id.action_global_noteMapFragment);
-            }
-        });
-        bottomNavigationView.findViewById(R.id.noteListFragment).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navController.navigate(R.id.action_global_noteListFragment);
-            }
-        });
+        bottomNavigationView.findViewById(R.id.noteMapFragment).setOnClickListener(v ->navController.navigate(R.id.action_global_noteMapFragment));
+        bottomNavigationView.findViewById(R.id.noteListFragment).setOnClickListener(v ->  navController.navigate(R.id.action_global_noteListFragment));
         NavigationUI.setupWithNavController(bottomNavigationView,navController);
         NavigationUI.setupActionBarWithNavController(this,navController);
-
         addBtn=findViewById(R.id.floatingActionButton);
-//        ActionBar ab=getSupportActionBar();
-//        ab.setDisplayHomeAsUpEnabled(true);
-        addBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                navController.popBackStack();
-                navController.navigate(R.id.action_global_addNoteFragment);
-            }
-        });
-
-
-
+        addBtn.setOnClickListener(v -> navController.navigate(R.id.action_global_addNoteFragment));
     }
 
 
@@ -87,11 +65,7 @@ public class MainActivity2 extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-
         return super.onOptionsItemSelected(item);
     }
-
-
-
 
 }

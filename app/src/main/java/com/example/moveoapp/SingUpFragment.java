@@ -96,8 +96,6 @@ public class SingUpFragment extends Fragment {
                     return;
                 }
 
-
-
                 Model.instance().regiser(emailInput, passwordInput,nameInput, new Model.Listener<User>() {
                     @Override
                     public void onComplete(User user) {
@@ -125,8 +123,6 @@ public class SingUpFragment extends Fragment {
                                 getActivity().finish();
                                 });
                             }
-
-
                         }
                         else {
                             Toast.makeText(getActivity().getApplicationContext(), "Authentication failed.",
