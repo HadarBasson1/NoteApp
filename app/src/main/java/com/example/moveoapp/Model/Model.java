@@ -35,6 +35,16 @@ public class Model {
         });
     }
 
+
+    public void getAllNotesByEmail(String email,Listener<List<Note>> callback) {
+        executor.execute(()->{
+            List<Note> data = localDb.noteDao().getAllByEmail(email);
+            mainHandler.post(()->{
+                callback.onComplete(data);
+            });
+        });
+    }
+
     public void getUserByEmail(String email, Listener<User> callback) {
         executor.execute(()->{
             User user = localDb.userDao().getUserByEmail(email);

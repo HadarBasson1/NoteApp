@@ -152,7 +152,7 @@ FusedLocationProviderClient client;
                                     formattedDateTime = currentDateTime.format(formatter);
                                 }
 
-                                Note note = new Note(title,formattedDateTime,body,key,"", Latitude, Longitude);
+                                Note note = new Note(title,formattedDateTime,body,key,MainActivity2.user.getEmail(), Latitude, Longitude);
                                 Model.instance().insertNote(note, new Model.Listener<Void>() {
                                     @Override
                                     public void onComplete(Void data) {

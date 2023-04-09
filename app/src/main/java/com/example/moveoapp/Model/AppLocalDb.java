@@ -6,7 +6,7 @@ import androidx.room.RoomDatabase;
 
 import com.example.moveoapp.MyApplication;
 
-@Database(entities = {Note.class,User.class}, version = 9)
+@Database(entities = {Note.class,User.class}, version = 10)
 
 abstract  class AppLocalDbRepository extends RoomDatabase {
     public abstract NoteDao noteDao();

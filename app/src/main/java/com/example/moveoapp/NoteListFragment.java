@@ -44,7 +44,7 @@ public class NoteListFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentNoteListBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-        Model.instance().getAllNotes((list) -> {
+        Model.instance().getAllNotesByEmail(MainActivity2.user.getEmail(),(list) -> {
             data = list;
             adapter.setData(data);
             adapter.setOnItemClickListener(new NoteRecyclerAdapter.OnItemClickListener() {

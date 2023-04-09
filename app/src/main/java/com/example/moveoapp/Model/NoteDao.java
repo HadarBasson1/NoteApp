@@ -26,5 +26,6 @@ public interface NoteDao {
     @Delete
     void delete(Note note);
 
-
+    @Query("SELECT * FROM note WHERE editor LIKE :email")
+    List<Note> getAllByEmail(String email);
 }

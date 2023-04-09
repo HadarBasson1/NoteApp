@@ -30,21 +30,10 @@ import java.util.List;
 public class NoteMapFragment extends Fragment {
     List<Note> data;
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
-
-        /**
-         * Manipulates the map once available.
-         * This callback is triggered when the map is ready to be used.
-         * This is where we can add markers or lines, add listeners or move the camera.
-         * In this case, we just add a marker near Sydney, Australia.
-         * If Google Play services is not installed on the device, the user will be prompted to
-         * install it inside the SupportMapFragment. This method will only be triggered once the
-         * user has installed Google Play services and returned to the app.
-         */
-
         @Override
         public void onMapReady(GoogleMap googleMap) {
             googleMap.clear();
-            Model.instance().getAllNotes((list)->{
+            Model.instance().getAllNotesByEmail(MainActivity2.user.getEmail(),(list)->{
                 data=list;
                 if (data.isEmpty()) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -123,7 +112,7 @@ public class NoteMapFragment extends Fragment {
 
     @Override
     public void onAttach(@NonNull Context context) {
-        Model.instance().getAllNotes((list)->{data=list;
+        Model.instance().getAllNotesByEmail(MainActivity2.user.getEmail(),(list)->{data=list;
         });
         super.onAttach(context);
     }
