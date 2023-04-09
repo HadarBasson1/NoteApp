@@ -49,9 +49,9 @@ public class HomeFragment extends Fragment {
 //                Picasso.get().invalidate(user.getImgUrl()); // clear the cache for the old URL
 //                String imageUrl = user.getImgUrl() + System.currentTimeMillis();
             if (imageUrl  != null && imageUrl.length() > 5) {
-                Picasso.get().load(imageUrl).placeholder(R.drawable.note).into(binding.homeImage);
+                Picasso.get().load(imageUrl).placeholder(R.drawable.profile).into(binding.homeImage);
             }else{
-                binding.homeImage.setImageResource(R.drawable.note);
+                binding.homeImage.setImageResource(R.drawable.profile);
             }
         }
 

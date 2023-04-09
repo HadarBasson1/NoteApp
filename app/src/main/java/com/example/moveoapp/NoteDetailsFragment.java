@@ -77,7 +77,7 @@ public class NoteDetailsFragment extends Fragment {
         });
 
         FloatingActionButton addBtn = requireActivity().findViewById(R.id.floatingActionButton);
-        addBtn.setVisibility(View.VISIBLE);
+        addBtn.setVisibility(View.GONE);
 
         return view;
     }

@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:alpha="0.4"
-        android:src="@drawable/note" />
+        android:src="@drawable/paper" />
 
     <TextView
         android:id="@+id/textView"
@@ -34,15 +34,15 @@
         android:layout_height="183dp"
         android:layout_marginTop="76dp"
         android:background="@drawable/edt_background"
-        android:backgroundTint="#01baef"
+        android:backgroundTint="#FFFFFF"
         android:drawablePadding="10dp"
         android:ems="10"
 
         android:hint="Enter the note text"
         android:inputType="textPersonName"
         android:textAlignment="center"
-        android:textColor="#fbfbff"
-        android:textColorHint="#fbfbff"
+        android:textColor="#000000"
+        android:textColorHint="#BFBFBF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add_note_fragment_title" />
@@ -53,15 +53,14 @@
         android:layout_height="59dp"
         android:layout_marginTop="60dp"
         android:background="@drawable/edt_background"
-        android:backgroundTint="#C0C0C0"
+        android:backgroundTint="#FFFFFF"
 
         android:drawablePadding="10dp"
         android:ems="10"
         android:hint="enter a title"
         android:inputType="textPersonName"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#fbfbff"
+        android:textColorHint="#BFBFBF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -74,10 +73,11 @@
         android:layout_marginBottom="30dp"
 
 
+        android:textColor="@color/white"
         android:background="@drawable/custom_button"
-        android:backgroundTint="#20bf55"
+        android:backgroundTint="#656565"
+
         android:text="save"
-        android:textColor="#FEFEFE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

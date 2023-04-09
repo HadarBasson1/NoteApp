@@ -14,7 +14,7 @@
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:padding="8dp"
-        android:src="@drawable/clipart1083386"
+        android:src="@drawable/bluenote"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

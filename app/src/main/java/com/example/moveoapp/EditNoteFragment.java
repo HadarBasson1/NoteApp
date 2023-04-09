@@ -61,7 +61,7 @@ public class EditNoteFragment extends Fragment {
 
 
         FloatingActionButton addBtn = requireActivity().findViewById(R.id.floatingActionButton);
-        addBtn.setVisibility(View.VISIBLE);
+        addBtn.setVisibility(View.GONE);
 
         binding.editNoteSaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
