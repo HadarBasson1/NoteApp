@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import com.example.moveoapp.Model.Model;
 import com.example.moveoapp.Model.Note;
 import com.example.moveoapp.databinding.FragmentNoteDetailsBinding;
-
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
 public class NoteDetailsFragment extends Fragment {
@@ -75,6 +75,9 @@ public class NoteDetailsFragment extends Fragment {
                 Navigation.findNavController(v).navigate(action);
             }
         });
+
+        FloatingActionButton addBtn = requireActivity().findViewById(R.id.floatingActionButton);
+        addBtn.setVisibility(View.VISIBLE);
 
         return view;
     }

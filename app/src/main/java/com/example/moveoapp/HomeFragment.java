@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import com.example.moveoapp.Model.Model;
 import com.example.moveoapp.Model.User;
 import com.example.moveoapp.databinding.FragmentHomeBinding;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 
 
@@ -53,6 +54,9 @@ public class HomeFragment extends Fragment {
                 binding.homeImage.setImageResource(R.drawable.note);
             }
         }
+
+        FloatingActionButton addBtn = requireActivity().findViewById(R.id.floatingActionButton);
+        addBtn.setVisibility(View.VISIBLE);
 
         return view;
     }

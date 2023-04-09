@@ -22,6 +22,7 @@ import com.example.moveoapp.Model.Model;
 import com.example.moveoapp.Model.Note;
 import com.example.moveoapp.Model.UserDao;
 import com.example.moveoapp.databinding.FragmentNoteListBinding;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -86,6 +87,9 @@ public class NoteListFragment extends Fragment {
         binding.notelist.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new NoteRecyclerAdapter(getLayoutInflater(), data);
         binding.notelist.setAdapter(adapter);
+
+        FloatingActionButton addBtn = requireActivity().findViewById(R.id.floatingActionButton);
+        addBtn.setVisibility(View.VISIBLE);
 
 
         return view;

@@ -62,6 +62,8 @@ public class MainActivity2 extends AppCompatActivity {
             }
         });
 
+
+
     }
 
 
@@ -85,20 +87,6 @@ public class MainActivity2 extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-//        else {
-//            return NavigationUI.onNavDestinationSelected(item,navController);
-//        }
-
-
-//        else if(item.getItemId()==R.id.noteListFragment){
-//            Log.d("tag","hiiiii");
-//            navController.navigate(R.id.action_global_noteListFragment);
-//        }
-//        else if(item.getItemId()==R.id.noteMapFragment){
-//            navController.navigate(R.id.action_global_noteMapFragment);
-//        }
-//
-
 
         return super.onOptionsItemSelected(item);
     }

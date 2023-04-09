@@ -33,6 +33,7 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -58,6 +59,9 @@ public class EditNoteFragment extends Fragment {
         binding.editNoteTitle.setText(note.getTitle());
         binding.editTextTextMultiLine2.setText(note.getBody());
 
+
+        FloatingActionButton addBtn = requireActivity().findViewById(R.id.floatingActionButton);
+        addBtn.setVisibility(View.VISIBLE);
 
         binding.editNoteSaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override

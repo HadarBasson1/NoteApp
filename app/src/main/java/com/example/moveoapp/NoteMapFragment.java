@@ -23,6 +23,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -103,7 +104,11 @@ public class NoteMapFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.fragment_note_map, container, false);
+        View view= inflater.inflate(R.layout.fragment_note_map, container, false);
+        FloatingActionButton addBtn = requireActivity().findViewById(R.id.floatingActionButton);
+        addBtn.setVisibility(View.VISIBLE);
+
+        return view;
     }
 
     @Override
