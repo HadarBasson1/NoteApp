@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 
 import android.os.Looper;
@@ -146,8 +147,10 @@ FusedLocationProviderClient client;
                                             @Override
                                             public void run() {
                                                 dialog.dismiss();
-                                                NavController navController = Navigation.findNavController(v);
-                                                navController.popBackStack();
+                                                NavController nav = Navigation.findNavController(v);
+                                                NavDestination prev = nav.getPreviousBackStackEntry().getDestination();
+                                                nav.popBackStack(nav.getGraph().getStartDestinationId(), false);
+                                                nav.navigate(prev.getId());
                                             }
                                         }, 1000);
 

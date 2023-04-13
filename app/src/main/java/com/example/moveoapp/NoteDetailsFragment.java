@@ -5,9 +5,13 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +19,7 @@ import android.view.ViewGroup;
 import com.example.moveoapp.Model.Model;
 import com.example.moveoapp.Model.Note;
 import com.example.moveoapp.databinding.FragmentNoteDetailsBinding;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
@@ -33,7 +38,6 @@ public class NoteDetailsFragment extends Fragment {
         binding.noteDetailsDeleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 // Set the message to display in the dialog box
                 builder.setMessage("Warning:Remove the note?");
@@ -41,7 +45,10 @@ public class NoteDetailsFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Model.instance().delete(note,(Void)->{
-                            Navigation.findNavController(v).popBackStack();
+                            NavController nav = Navigation.findNavController(v);
+                            NavDestination prev = nav.getPreviousBackStackEntry().getDestination();
+                            nav.popBackStack(nav.getGraph().getStartDestinationId(), false);
+                            nav.navigate(prev.getId());
                         });
                     }
                 });
@@ -61,6 +68,7 @@ public class NoteDetailsFragment extends Fragment {
         binding.noteDetailsEditBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                NavController nav = Navigation.findNavController(v);
                 NoteDetailsFragmentDirections.ActionNoteDetailsFragmentToEditNoteFragment action = NoteDetailsFragmentDirections.actionNoteDetailsFragmentToEditNoteFragment(note);
                 Navigation.findNavController(v).navigate(action);
             }
